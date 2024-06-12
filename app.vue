@@ -1,6 +1,9 @@
 <template>
   <NuxtLayout>
+    <!-- <NuxtPage page-key="static" /> -->
+    <!-- <NuxtPage /> -->
     <NuxtPage />
+    <!-- <RouterView /> -->
   </NuxtLayout>
 </template>
 

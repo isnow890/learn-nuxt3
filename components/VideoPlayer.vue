@@ -3,7 +3,7 @@
     <iframe
       width="100%"
       height="100%"
-      :src="'https://www.youtube.com/embed/zmq2zu-UsRk'"
+      :src="src"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -12,24 +12,12 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped>
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  height: 0;
-  overflow: hidden;
+<script setup lang="ts">
+interface Props {
+  src?: string;
 }
-
-.video-container iframe,
-.video-container object,
-.video-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-</style>
+// withDefault 사용하여 기본값 지정할 수 있음.
+withDefaults(defineProps<Props>(), {
+  src: 'https://www.youtube.com/embed/zmq2zu-UsRk',
+});
+</script>

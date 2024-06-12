@@ -16,22 +16,17 @@
   </q-card>
 </template>
 <script setup lang="ts">
-// const props = defineProps({
-//   foo: { type: String, required: true },
-//   bar: Number,
-// });
-
 // defineProps({
 //   title: {
 //     type: String,
-//     default: '',
+//     default: 'gg',
 //   },
 // });
+
 interface Props {
   title?: string;
 }
-
-const props = defineProps<Props>();
+defineProps<Props>();
 
 // props.title;
 </script>
