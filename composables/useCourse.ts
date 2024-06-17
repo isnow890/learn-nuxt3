@@ -1,3 +1,4 @@
+import { useCourses } from './useCourses';
 import type { CourseWithPath } from '~/types/course';
 
 interface CourseReturn {
