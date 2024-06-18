@@ -75,7 +75,7 @@
             label="이전 강의"
             color="primary"
             unelevated
-            :to="prevCourse.path"
+            @click="movePage(prevCourse.path)"
           />
 
           <q-btn
@@ -89,10 +89,10 @@
 
           <q-btn
             v-if="nextCourse"
-            :to="nextCourse.path"
             label="다음 강의"
             color="primary"
             unelevated
+            @click="movePage(nextCourse.path)"
           />
         </ClientOnly>
       </template>
@@ -117,12 +117,16 @@ definePageMeta({
   pageType: '',
   keepalive: true,
   alias: ['/lecture/:cousreSlug'],
+  // layout:'same-layout'
 });
 
 console.log('route.meta.title', route.meta);
 const memo = ref('');
 const completed = ref(false);
 
+const movePage = async (path: string) => {
+  await navigateTo(path);
+};
 // route.meta.pa
 </script>
 
