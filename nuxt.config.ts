@@ -10,4 +10,12 @@ export default defineNuxtConfig({
   quasar: {
     /* */
   },
+  imports: {
+    presets: [
+      {
+        from: 'vue-18n',
+        imports: ['useI18n'],
+      },
+    ],
+  },
 });
