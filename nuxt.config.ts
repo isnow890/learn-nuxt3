@@ -7,9 +7,11 @@ export default defineNuxtConfig({
   },
 
   modules: ['nuxt-quasar-ui'],
+
   quasar: {
     /* */
   },
+
   imports: {
     presets: [
       {
@@ -18,4 +20,6 @@ export default defineNuxtConfig({
       },
     ],
   },
+
+  compatibilityDate: '2024-09-13',
 });

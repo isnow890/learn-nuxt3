@@ -77,6 +77,5 @@ const languages = ref<Language[]>([
   { name: '한국어', code: 'ko' },
 ]);
 
-const { locale } = useI18n();
-
+// const { locale } = useI18n();
 </script>

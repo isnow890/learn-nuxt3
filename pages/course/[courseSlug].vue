@@ -116,7 +116,7 @@ definePageMeta({
   title: 'My home page',
   pageType: '',
   keepalive: true,
-  alias: ['/lecture/:cousreSlug'],
+  alias: ['/lecture/:courseSlug'],
   // layout:'same-layout'
 });
 
