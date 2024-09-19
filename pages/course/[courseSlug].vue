@@ -120,7 +120,10 @@ if (!course) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Course not found',
-    fatal: true,
+    // fatal: true,
+    // data: {
+    //   myCustomField: true,
+    // },
   });
 }
 
@@ -130,7 +133,7 @@ definePageMeta({
   // title: title.value,
   title: 'My home page',
   pageType: '',
-  keepalive: true,
+  // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layout'
 });
@@ -145,6 +148,9 @@ const movePage = async (path: string) => {
 
 const toggleComplete = () => {
   // $fetch('/api/error');
+
+  showError('에러가 발생했습니다.');
+
   completed.value = !completed.value;
 };
 // route.meta.pa
