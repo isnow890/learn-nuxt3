@@ -33,8 +33,8 @@
               :key="code"
               v-close-popup
               clickable
-              :active="code === $i18n.locale"
-              @click="$i18n.locale = code"
+              :active="code === ($i18n.locale as unknown as string)"
+              @click="($i18n.locale as unknown as string) = code"
             >
               <!-- :active="code === $i18n.locale"
               @click="$i18n.locale = code" -->

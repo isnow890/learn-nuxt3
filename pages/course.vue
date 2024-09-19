@@ -3,7 +3,8 @@
     <div class="row q-col-gutter-md">
       <div class="col-3">
         <q-card>
-          <q-item-label header>강의 로드맵 {{ $hello('haha') }}</q-item-label>
+          <q-item-label header>강의 로드맵 </q-item-label>
+          <!-- {{ $hello('haha') }} -->
           <q-list bordered separator>
             <q-item
               v-for="(course, index) in courses"
@@ -15,6 +16,9 @@
               <q-item-section>
                 {{ index + 1 }}. {{ course.title }}
               </q-item-section>
+            </q-item>
+            <q-item v-ripple clickable to="/course/empty">
+              <q-item-section> Empty Course (throw error) </q-item-section>
             </q-item>
             <!-- 생략 -->
             <!-- <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
