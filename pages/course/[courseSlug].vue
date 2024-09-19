@@ -55,8 +55,9 @@
           unelevated
           :outline="completed ? false : true"
           :icon="completed ? 'check' : undefined"
-          @click="completed = !completed"
+          @click="toggleComplete"
         />
+        <!-- @click="completed = !completed" -->
         <q-input
           v-model="memo"
           type="textarea"
@@ -82,9 +83,9 @@
             label="쿼리 추가"
             color="dark"
             unelevated
-            :to="{ path: $route.path, query: { timestamp: Date.now() } }"
+            :to="{ path: route.path, query: { timestamp: Date.now() } }"
           />
-          {{ $route.fullPath }}
+          {{ route.fullPath }}
           <q-space />
 
           <q-btn
@@ -107,7 +108,21 @@ const route = useRoute();
 
 const courseSlug = route.params.courseSlug as string;
 const { course, prevCourse, nextCourse } = useCourse(courseSlug);
+/*
 console.log('[courseSlug].vue 컴포넌트 setup hooks');
+*/
+
+console.log('before error :', process.server);
+
+if (!course) {
+  console.log('before error :', process.server);
+
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Course not found',
+    fatal: true,
+  });
+}
 
 // const title = ref('');
 definePageMeta({
@@ -126,6 +141,11 @@ const completed = ref(false);
 
 const movePage = async (path: string) => {
   await navigateTo(path);
+};
+
+const toggleComplete = () => {
+  // $fetch('/api/error');
+  completed.value = !completed.value;
 };
 // route.meta.pa
 </script>

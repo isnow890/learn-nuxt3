@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   imports: {
     presets: [
       {
-        from: 'vue-18n',
+        from: 'vue-i18n',
         imports: ['useI18n'],
       },
     ],

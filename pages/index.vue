@@ -25,6 +25,8 @@
 
 <script setup lang="ts">
 const { courses } = useCourses();
+
+console.log('index.vue');
 </script>
 
 <style scoped></style>
