@@ -1,30 +1,32 @@
 <template>
   <q-form class="q-gutter-lg" @submit.prevent="handleLoginSubmit">
-    <q-input v-model="form.email" filled label="email"/>
+    <q-input v-model="form.email" filled label="email" />
+    <q-input v-model="form.password" filled type="password" label="password" />
 
-    <q-input v-model="form.passwowrd" filled type="password" label="password"/>
-
+    <div v-if="error" class="text-red text-center">{{ error.message }}</div>
     <div class="q-mt-lg">
       <q-btn
-          class="full-width"
-          label="Login"
-          type="submit"
-          size="lg"
-          color="primary"
-          no-caps
-          :loading="loading"
+        class="full-width"
+        label="Login"
+        type="submit"
+        size="lg"
+        color="primary"
+        no-caps
+        :loading="loading"
       />
     </div>
   </q-form>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{ success: []; }>();
+const emit = defineEmits<{ success: [] }>();
 // const emit = defineEmits(['success']);
+
+const { signIn } = useAuth();
 
 const form = ref({
   email: '',
-  passwowrd: '',
+  password: '',
 });
 const error = ref<Error | null>(null);
 const loading = ref(false);
@@ -36,6 +38,8 @@ const handleLoginSubmit = () => {
 
     // login business logic
 
+    signIn(form.value.email, form.value.password);
+
     emit('success');
   } catch (err: unknown) {
     if (err instanceof Error) {
@@ -44,9 +48,10 @@ const handleLoginSubmit = () => {
       throw Error;
     }
   } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 1500);
+    loading.value = false;
+    // setTimeout(() => {
+    //   loading.value = false;
+    // }, 1500);
   }
 };
 </script>

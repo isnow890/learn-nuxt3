@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf" class="bg-grey-2">
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
-        <q-toolbar-title> Vue & Nuxt Mastery Class 1</q-toolbar-title>
+        <q-toolbar-title> Vue & Nuxt Mastery Class 1 </q-toolbar-title>
         <NuxtLink v-slot="{ navigate }" custom to="/">
           <q-btn stretch flat :label="$t('home')" no-caps @click="navigate" />
         </NuxtLink>
@@ -47,7 +47,12 @@
         </q-btn-dropdown>
 
         <q-separator dark vertical />
-        <NuxtLink v-slot="{ navigate }" custom to="/login">
+        <NuxtLink
+          v-if="!isAuthenticated"
+          v-slot="{ navigate }"
+          custom
+          to="/login"
+        >
           <q-btn
             stretch
             flat
@@ -56,23 +61,27 @@
             @click="navigate()"
           />
         </NuxtLink>
-        <NuxtLink v-slot="{ navigate }" custom to="/">
-          <q-btn
-            stretch
-            flat
-            :label="$t('logout')"
-            no-caps
-            @click="navigate()"
-          />
-        </NuxtLink>
+        <q-btn
+          v-else
+          stretch
+          flat
+          :label="$t('logout')"
+          no-caps
+          @click="signOut()"
+        />
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
+      <q-banner class="bg-primary text-white" v-if="isAuthenticated">
+        {{ authUser }}
+      </q-banner>
       <slot></slot>
     </q-page-container>
   </q-layout>
 </template>
 <script setup lang="ts">
+const { authUser, isAuthenticated } = useAuthUser();
+const { signOut } = useAuth();
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
   margin: '0 auto',
@@ -98,4 +107,6 @@ const languages = ref<Language[]>([
 ]);
 
 // const { locale } = useI18n();
+
+const counter = useState('counter');
 </script>
