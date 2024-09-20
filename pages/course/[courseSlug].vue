@@ -114,18 +114,18 @@ console.log('[courseSlug].vue 컴포넌트 setup hooks');
 
 console.log('before error :', process.server);
 
-if (!course) {
-  console.log('before error :', process.server);
+// if (!course) {
+//   console.log('before error :', process.server);
 
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Course not found',
-    // fatal: true,
-    // data: {
-    //   myCustomField: true,
-    // },
-  });
-}
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: 'Course not found',
+//     // fatal: true,
+//     // data: {
+//     //   myCustomField: true,
+//     // },
+//   });
+// }
 
 // const title = ref('');
 definePageMeta({
@@ -136,6 +136,38 @@ definePageMeta({
   // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layout'
+  // validate: (route) => {
+  middleware: (route) => {
+    const courseSlug = route.params.courseSlug as string;
+    const { course } = useCourse(courseSlug);
+
+    if (!course) {
+      // return navigateTo('/');
+
+      // console.log('before error :', process.server);
+
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          statusMessage: 'Course not found',
+          // fatal: true,
+          // data: {
+          //   myCustomField: true,
+          // },
+        })
+      );
+      // return false;
+      // throw createError({
+      //   statusCode: 404,
+      //   statusMessage: 'Course not found',
+      //   // fatal: true,
+      //   // data: {
+      //   //   myCustomField: true,
+      //   // },
+      // });
+    }
+    // return true;
+  },
 });
 
 console.log('route.meta.title', route.meta);
@@ -149,9 +181,10 @@ const movePage = async (path: string) => {
 const toggleComplete = () => {
   // $fetch('/api/error');
 
-  showError('에러가 발생했습니다.');
+  // showError('에러가 발생했습니다.');
 
   completed.value = !completed.value;
+  throw createError('에러가 발생했습니다');
 };
 // route.meta.pa
 </script>
