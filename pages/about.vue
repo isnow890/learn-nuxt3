@@ -60,11 +60,13 @@
 </template>
 
 <script setup lang="ts">
-import { useCounterStore } from '~/store/couter';
+import { useCounterStore } from '~/stores/couter';
 
 const counter = useState<number>('counter', () => 1);
 const clear = () => clearNuxtState();
 const counterStore = useCounterStore();
+
+
 const { count, doubleCount } = storeToRefs(counterStore);
 const sameCounter = useState<number>('counter', () => 1);
 </script>

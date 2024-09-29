@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  const { isAdmin, isAuthenticated } = useAuthUser();
+  const { isAdmin, isAuthenticated } = storeToRefs(useAuthStore());
 
   if (!isAuthenticated.value) {
     return navigateTo('login');
@@ -8,5 +8,4 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (!isAdmin.value) {
     return navigateTo('/');
   }
-  
 });
