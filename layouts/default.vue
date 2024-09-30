@@ -26,7 +26,7 @@
         </NuxtLink>
 
         <q-separator dark vertical />
-        <q-btn-dropdown stretch flat no-caps :label="'???'">
+        <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
           <q-list padding dense>
             <q-item
               v-for="{ code, name } in languages"
@@ -47,34 +47,38 @@
         </q-btn-dropdown>
 
         <q-separator dark vertical />
-        <NuxtLink
-          v-if="!isAuthenticated"
-          v-slot="{ navigate }"
-          custom
-          to="/login"
-        >
+        <ClientOnly>
+          <NuxtLink
+            v-if="!isAuthenticated"
+            v-slot="{ navigate }"
+            custom
+            to="/login"
+          >
+            <q-btn
+              stretch
+              flat
+              :label="$t('login')"
+              no-caps
+              @click="navigate()"
+            />
+          </NuxtLink>
           <q-btn
+            v-else
             stretch
             flat
-            :label="$t('login')"
+            :label="$t('logout')"
             no-caps
-            @click="navigate()"
+            @click="signOut()"
           />
-        </NuxtLink>
-        <q-btn
-          v-else
-          stretch
-          flat
-          :label="$t('logout')"
-          no-caps
-          @click="signOut()"
-        />
+        </ClientOnly>
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
-      <q-banner class="bg-primary text-white" v-if="isAuthenticated">
-        {{ authUser }}
-      </q-banner>
+      <ClientOnly>
+        <q-banner class="bg-primary text-white" v-if="isAuthenticated">
+          {{ authUser }}
+        </q-banner>
+      </ClientOnly>
       <slot></slot>
     </q-page-container>
   </q-layout>
@@ -108,6 +112,17 @@ const languages = ref<Language[]>([
   { name: 'English', code: 'en' },
   { name: '한국어', code: 'ko' },
 ]);
+
+const { locale } = useI18n();
+
+const selectedLanguageName = computed(
+  () => languages.value.find((lang) => lang.code === locale.value)?.name
+);
+
+watch(locale, (val) => {
+  console.log('감지됨');
+  useCookie('locale').value = val;
+});
 
 // const { locale } = useI18n();
 

@@ -6,7 +6,11 @@ export default defineNuxtConfig({
     shim: false,
   },
 
-  modules: ['nuxt-quasar-ui', '@pinia/nuxt'],
+  modules: [
+    'nuxt-quasar-ui',
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+  ],
 
   quasar: {
     plugins: ['Notify'],
