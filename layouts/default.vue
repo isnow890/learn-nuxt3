@@ -26,21 +26,16 @@
         </NuxtLink>
 
         <q-separator dark vertical />
-        <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
+        <q-btn-dropdown stretch flat no-caps label="English">
           <q-list padding dense>
-            <q-item
-              v-for="{ code, name } in languages"
-              :key="code"
-              v-close-popup
-              clickable
-              :active="code === ($i18n.locale as unknown as string)"
-              @click="($i18n.locale as unknown as string) = code"
-            >
-              <!-- :active="code === $i18n.locale"
-              @click="$i18n.locale = code" -->
-
+            <q-item v-close-popup clickable :to="localePath('/', 'en')">
               <q-item-section>
-                <q-item-label>{{ name }}</q-item-label>
+                <q-item-label>English</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item v-close-popup clickable :to="switchLocalePath('ko')">
+              <q-item-section>
+                <q-item-label>한국어</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
@@ -103,28 +98,13 @@ const moveYoutube = async () => {
   });
 };
 
-interface Language {
-  name: string;
-  code: 'en' | 'ko';
-}
-
-const languages = ref<Language[]>([
-  { name: 'English', code: 'en' },
-  { name: '한국어', code: 'ko' },
-]);
-
-const { locale } = useI18n();
-
-const selectedLanguageName = computed(
-  () => languages.value.find((lang) => lang.code === locale.value)?.name
-);
-
-watch(locale, (val) => {
-  console.log('감지됨');
-  useCookie('locale').value = val;
-});
+// const { locale } = useI18n();
 
 // const { locale } = useI18n();
 
+// const $t = (str: string) => str;
 const counter = useState('counter');
+
+const localePath = useLocalePath();
+const switchLocalePath = useSwitchLocalePath();
 </script>

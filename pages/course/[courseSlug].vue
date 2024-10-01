@@ -1,5 +1,10 @@
 <template>
   <div>
+    <!-- <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="description" />
+    </Head> -->
+
     <AppCard>
       <template #header>
         <div class="text-h5 text-weight-medium">{{ course?.title }}</div>
@@ -173,6 +178,14 @@ definePageMeta({
 console.log('route.meta.title', route.meta);
 const memo = ref('');
 const completed = ref(false);
+
+// const title = computed(() => course?.title);
+// const description = computed(() => course?.content);
+
+useSeoMeta({
+  title: () => course?.title || '',
+  description: course?.content,
+});
 
 const movePage = async (path: string) => {
   await navigateTo(path);

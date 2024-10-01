@@ -36,6 +36,9 @@ const description = ref('짐코딩과 함께 Vue3 기초부터');
 // });
 useSeoMeta({
   title,
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk} - 짘` : '짘';
+  },
   description,
   ogTitle: title,
   ogDescription: description,
