@@ -26,6 +26,22 @@
 // nuxtApp.provide('hello', (msg: string) => {
 //   return `Hello ${msg}`;
 // });
+const title = ref('Vue & Nuxt Mastery Class');
+
+const description = ref('짐코딩과 함께 Vue3 기초부터');
+
+// useHead({
+//   title,
+//   meta: [{ name: 'description', content: description }],
+// });
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description,
+  ogType: 'website',
+  ogImage: '/img/og-imge.png',
+});
 </script>
 
 <style scoped></style>

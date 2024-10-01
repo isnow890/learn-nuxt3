@@ -32,4 +32,16 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-09-13',
+  ssr: true,
+  app: {
+    head: {
+      title: 'Vue & Nuxt 강의',
+      meta: [
+        {
+          name: 'description',
+          content: '짐코딩 nuxt 강의입니다.',
+        },
+      ],
+    },
+  },
 });

@@ -1,11 +1,12 @@
+import { getUserFromEvent } from '~/server/utils/auth';
+
 export default defineEventHandler(async (event) => {
-  const userJsonString = getCookie(event, '__user');
-  if (!userJsonString) {
+  const user = event.context.user;
+  
+
+  if (!user) {
     return { user: null };
   }
-
-  const user = JSON.parse(userJsonString);
-
   return {
     user,
   };
