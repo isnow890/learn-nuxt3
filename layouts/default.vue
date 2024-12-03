@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf" class="bg-grey-2">
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
-        <q-toolbar-title> Vue & Nuxt Mastery Class 1 </q-toolbar-title>
+        <q-toolbar-title>{{ appConfig.title }}</q-toolbar-title>
         <NuxtLink v-slot="{ navigate }" custom to="/">
           <q-btn stretch flat :label="$t('home')" no-caps @click="navigate" />
         </NuxtLink>
@@ -107,4 +107,9 @@ const counter = useState('counter');
 
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
+
+const appConfig = useAppConfig();
+console.log('appConfig:', appConfig);
+
+
 </script>

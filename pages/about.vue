@@ -87,4 +87,6 @@ const { count, doubleCount } = storeToRefs(counterStore);
 const sameCounter = useState<number>('counter', () => 1);
 const localStorageColor = useLocalStorage('color-key', null);
 const sessionStorageColor = useSessionStorage('color-key', null);
+const config = useRuntimeConfig();
+console.log('about config: ', config.public.clientConfigvalue);
 </script>
