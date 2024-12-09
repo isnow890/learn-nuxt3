@@ -34,12 +34,12 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    // presets: [
-    //   {
-    //     from: 'vue-i18n',
-    //     imports: ['useI18n'],
-    //   },
-    // ],
+    presets: [
+      {
+        from: 'vue-i18n',
+        imports: ['useI18n'],
+      },
+    ],
   },
 
   compatibilityDate: '2024-09-13',

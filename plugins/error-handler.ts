@@ -20,7 +20,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     // console.log('vue:error', err);
 
     if (err instanceof Error) {
-      if (import.meta.client) {
+      if (import.meta.client) { 
         Notify.create({
           message: err.message,
           type: 'negative',
